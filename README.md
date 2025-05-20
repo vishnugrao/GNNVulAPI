@@ -10,7 +10,7 @@ GNNVulAPI provides a simple interface to analyze C code snippets for potential s
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/gnnvulapi.git
+git clone https://github.com/vishnugrao/gnnvulapi.git
 cd gnnvulapi
 
 ```
