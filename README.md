@@ -9,30 +9,45 @@ GNNVulAPI provides a simple interface to analyze C code snippets for potential s
 ## Installation
 
 ```bash
-pip install gnnvulapi
+# Clone the repository
+git clone https://github.com/your-username/gnnvulapi.git
+cd gnnvulapi
+
+```
+
+## MCP Integration
+
+### Configuration
+
+Add the following to your `claude_desktop_config.json`:
+
+```json
+{
+    "mcpServers": {
+        "gnnvulapi": {
+            "command": "/Users/vishnurao/.local/bin/uv",
+            "args": [
+                "--directory",
+                "/Users/vishnurao/Desktop/Dev/ImplPractice/gnnvulapi",
+                "run",
+                "gnnvulapi.py"
+            ]
+        }
+    }
+}
+```
+
+Note: Replace the directory path with your actual workspace path where you cloned the repository.
+
+### Starting the Server
+
+```bash
+uv run gnnvulapi.py
 ```
 
 ## Usage
 
-```python
-from gnnvulapi import check_vulnerability
-
-# Example C code
-c_code = """
-#include <stdio.h>
-#include <string.h>
-
-int main() {
-    char buffer[10];
-    strcpy(buffer, "This is too long");
-    return 0;
-}
-"""
-
-# Check for vulnerabilities
-result = await check_vulnerability(c_code)
-print(result)
-```
+Use through Claude desktop by pasting c code as a prompt with or without some instructions.
 
 ## API Reference
 
@@ -52,7 +67,24 @@ Analyzes a C code snippet for potential vulnerabilities.
 
 - httpx
 - mcp
+- uv (for running the server)
 
 ## Note
 
 The code input must be a valid, compilable C program. All whitespace and newlines will be preserved in the analysis.
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Ensure `uv` is installed:
+```bash
+pip install uv
+```
+
+2. Verify the configuration path in `claude_desktop_config.json` matches your workspace location
+
+3. Check that all dependencies are properly installed:
+```bash
+pip install -r requirements.txt
+```
